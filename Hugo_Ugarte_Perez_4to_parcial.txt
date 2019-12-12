@@ -1,0 +1,46 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.cluster import KMeans 
+from sklearn import metrics
+
+v1=[50,38,28,8,8,16,5,2]
+v2=[134844,55526,5523,4067,611,4459,2195,1225]
+?
+print(v1)
+print(v2)
+x=np.array(v1)
+y=np.array(v2)
+
+X=np.array(list(zip(x,y))).reshape(len(x),2)
+plt.plot(v1,v2, 'o')
+
+plt.xlabel('x')
+plt.ylabel('y')
+plt.grid()
+plt.legend()
+plt.show()
+K=2
+modelo_k_means = KMeans(n_clusters=K)
+
+modelo_k_means.fit(X)
+centroides = modelo_k_means.cluster_centers_
+etiquetas = modelo_k_means.labels_
+predecir = modelo_k_means.predict(X)
+?
+#calculando los centroides
+print(predecir)
+print(modelo_k_means.cluster_centers_)
+centroides = modelo_k_means.cluster_centers_
+etiquetas = modelo_k_means.labels_
+?
+#para la grafica
+plt.plot(X[etiquetas==0,0],X[etiquetas==0,1],'r.', label='cluster 1')
+plt.plot(X[etiquetas==1,0],X[etiquetas==1,1],'b.', label='cluster 2')
+?
+plt.plot(centroides[:,0],centroides[:,1],'mo',markersize=6, label='centroides')
+?
+plt.xlabel('x')
+plt.ylabel('y')
+plt.grid()
+plt.legend(loc='best')
+plt.show()
